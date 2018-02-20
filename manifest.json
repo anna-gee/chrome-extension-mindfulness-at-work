@@ -9,15 +9,17 @@
     "activeTab",
   	"<all_urls>",
 	"notifications",
-	"alarms"
+	"alarms",
+	"https://raw.githubusercontent.com/"
   ],
   "content_scripts": [{
         "matches": ["<all_urls>"],
         "all_frames": false,
         "js":      ["content.js"],
 		"css": ["content.css"]
-    }],
-	"background": {
-		"scripts": ["eventPage.js"]
-    }
+  }],
+  "background": {
+	"scripts": ["eventPage.js"]
+  },
+  "update_url": "https://raw.githubusercontent.com/anna-gee/chrome-extension-mindfulness-at-work/master/manifest.json"
 }
