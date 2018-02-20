@@ -1,17 +1,24 @@
-chrome.alarms.create("mindfulnessTimer", {delayInMinutes: 60, periodInMinutes: 60});
+chrome.alarms.create("mindfulnessTimer", {delayInMinutes: 1, periodInMinutes: 1});
 
 fetch('https://raw.githubusercontent.com/anna-gee/chrome-extension-mindfulness-at-work/master/messages.json')
+.then(function(response) {
+	if (!response.ok) {
+		throw Error(response.statusText);
+	}
+	return response;
+})
+.catch(function(err){
+	console.log('failed to get from remote repository, falling back to local');
+	return fetch('./messages.json');
+})
 .then(function(response) {
 	return response.text();
 })
 .then(function(text){
 	var json = JSON.parse(text);
-	setUpListener(json.messages);	
-});
-
-function setUpListener (msgs) {
+	
 	chrome.alarms.onAlarm.addListener(function( alarm ) {
-		var messages = msgs;
+		var messages = json.messages;
 
 		chrome.notifications.create({
 			type:     'basic',
@@ -25,14 +32,10 @@ function setUpListener (msgs) {
 			let text = '';
 			chrome.tabs.sendMessage(tabs[0].id, {data: text}, function(response) {
 
-				console.log('success');
 			});
-		
-			console.log("Got an alarm!", alarm);
 		});
 	});
-}
-
+});
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
