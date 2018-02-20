@@ -18,7 +18,7 @@ function setUpListener (msgs) {
 			iconUrl:  'waterdrop.png',
 			title:    'Mindfulness reminder',
 			message:  messages[getRandomIntInclusive(0, messages.length -1)],
-
+			requireInteraction: true
 		});
 		
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs)	{
