@@ -1,4 +1,4 @@
-chrome.alarms.create("mindfulnessTimer", {delayInMinutes: 1, periodInMinutes: 1});
+chrome.alarms.create("mindfulnessTimer", {delayInMinutes: 60, periodInMinutes: 60});
 
 fetch('https://raw.githubusercontent.com/anna-gee/chrome-extension-mindfulness-at-work/master/messages.json')
 .then(function(response) {
