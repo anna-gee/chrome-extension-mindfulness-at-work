@@ -20,20 +20,27 @@ fetch('https://raw.githubusercontent.com/anna-gee/chrome-extension-mindfulness-a
 	chrome.alarms.onAlarm.addListener(function( alarm ) {
 		var messages = json.messages;
 
-		chrome.notifications.create({
-			type:     'basic',
-			iconUrl:  'beauty.png',
-			title:    'Mindfulness reminder',
-			message:  messages[getRandomIntInclusive(0, messages.length -1)],
-			requireInteraction: true
-		});
-		
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs)	{
-			let text = '';
-			chrome.tabs.sendMessage(tabs[0].id, {data: text}, function(response) {
-
+		chrome.notifications.getAll(function (notifications){
+			if (Object.keys(notifications).length > 0) return;
+			
+			chrome.notifications.create({
+				type:     'basic',
+				iconUrl:  'beauty.png',
+				title:    'Mindfulness reminder',
+				message:  messages[getRandomIntInclusive(0, messages.length -1)],
+				requireInteraction: true
 			});
+			
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)	{
+				let text = '';
+				chrome.tabs.sendMessage(tabs[0].id, {data: text}, function(response) {
+
+				});
+			});
+			
 		});
+			
+		
 	});
 });
 
