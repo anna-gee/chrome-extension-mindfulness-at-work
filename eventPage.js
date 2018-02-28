@@ -22,7 +22,7 @@ fetch('https://raw.githubusercontent.com/anna-gee/chrome-extension-mindfulness-a
 
 		chrome.notifications.create({
 			type:     'basic',
-			iconUrl:  'waterdrop.png',
+			iconUrl:  'beauty.png',
 			title:    'Mindfulness reminder',
 			message:  messages[getRandomIntInclusive(0, messages.length -1)],
 			requireInteraction: true
