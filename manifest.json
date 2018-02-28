@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Mindfulness at work",
   "description": "This extension prompts the user with a mindfulness quote every 60 minutes.",
